@@ -8,7 +8,7 @@ public class AdminLogin implements LoginInterface{
 
     }
 
-    @Override
+
     public void connect() {
 
     }
