@@ -6,6 +6,21 @@ import java.util.Scanner;
 public class UserLogin implements LoginInterface{
     private String username;
     private String password;
+    private boolean access;
+
+    private boolean getAccess() {
+        return access;
+    }
+
+    private void setAccess(boolean access) {
+        this.access = access;
+    }
+
+     public UserLogin(){
+        setUsername("");
+        setPassword("");
+        access = false;
+    }
 
     private String getUsername() {
         return this.username;
@@ -38,11 +53,24 @@ public class UserLogin implements LoginInterface{
     public void authentication() {
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-
-
+            String query = "select count(*) from User where username = ? and password = ?;";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, getUsername());
+            pst.setString(2, getPassword());
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            setAccess(rs.getString(1).equals("1"));
         } catch (Exception e){
             e.printStackTrace();
         }
+        if(getAccess()) System.out.println("Access granted");
+        else System.out.println("Access denied");
     }
+}
 
+class TestUserLogin {
+    public static void main(String[] args) {
+        UserLogin login = new UserLogin();
+        login.inputPrompt();
+    }
 }
