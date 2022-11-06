@@ -8,7 +8,7 @@ public class UserLogin implements LoginInterface{
     private String password;
     private boolean access;
 
-    private boolean getAccess() {
+    public boolean getAccess() {
         return access;
     }
 
