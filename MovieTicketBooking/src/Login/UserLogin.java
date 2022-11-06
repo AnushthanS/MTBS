@@ -63,7 +63,5 @@ public class UserLogin implements LoginInterface{
         } catch (Exception e){
             e.printStackTrace();
         }
-        if(getAccess()) System.out.println("Access granted");
-        else System.out.println("Access denied");
     }
 }
