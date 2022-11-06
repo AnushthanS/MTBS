@@ -67,10 +67,3 @@ public class UserLogin implements LoginInterface{
         else System.out.println("Access denied");
     }
 }
-
-class TestUserLogin {
-    public static void main(String[] args) {
-        UserLogin login = new UserLogin();
-        login.inputPrompt();
-    }
-}
