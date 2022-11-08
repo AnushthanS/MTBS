@@ -22,7 +22,7 @@ public class UserLogin implements LoginInterface{
         access = false;
     }
 
-    private String getUsername() {
+    public String getUsername() {
         return this.username;
     }
 
@@ -53,7 +53,7 @@ public class UserLogin implements LoginInterface{
     public void authentication() {
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "select count(*) from User where username = ? and password = ?;";
+            String query = "select count(*) from user where username = ? and password = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, getUsername());
             pst.setString(2, getPassword());
