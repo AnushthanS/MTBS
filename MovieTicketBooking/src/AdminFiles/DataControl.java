@@ -1,4 +1,4 @@
-package Admin;
+package AdminFiles;
 
 public class DataControl {
 
