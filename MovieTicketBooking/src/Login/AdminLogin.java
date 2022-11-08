@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class AdminLogin implements LoginInterface{
 
-    private String adminname;
+    private String adminName;
     private String password;
 
     private boolean access;
@@ -16,16 +16,16 @@ public class AdminLogin implements LoginInterface{
     private void setAccess(boolean access) {this.access = access;}
 
     public AdminLogin(){
-        setAdminname("");
+        setAdminName("");
         setPassword("");
         access = false;
     }
-    private String getAdminname() {
-        return adminname;
+    private String getAdminName() {
+        return adminName;
     }
 
-    private void setAdminname(String adminname) {
-        this.adminname = adminname;
+    private void setAdminName(String adminName) {
+        this.adminName = adminName;
     }
     private String getPassword() {
         return password;
@@ -37,7 +37,7 @@ public class AdminLogin implements LoginInterface{
     public void inputPrompt(){
         System.out.print("Enter Admin name: ");
         Scanner scanner = new Scanner(System.in);
-        setAdminname(scanner.next());
+        setAdminName(scanner.next());
 
         System.out.print("Enter password: ");
 
@@ -49,9 +49,9 @@ public class AdminLogin implements LoginInterface{
     public void authentication() {
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "select count(*) from Admin where adminname = ? and password = ?;";
+            String query = "select count(*) from Admin where admin_name = ? and password = ?;";
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, getAdminname());
+            pst.setString(1, getAdminName());
             pst.setString(2, getPassword());
             ResultSet rs = pst.executeQuery();
             rs.next();
