@@ -69,7 +69,7 @@ public class User {
     public void fillDetails(){
         try{
             Connection con = getConnection();
-            String query = "select * from user where username = ?;";
+            String query = "select * from User where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
 
             pst.setString(1, getUsername());
