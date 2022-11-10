@@ -11,11 +11,9 @@ public class TestUser {
             User user = new User(login);
             user.printDetails();
             UserChange userChange = new UserChange(user);
-            userChange.changeName("Rishabh");
-            userChange.changePassword("sux");
-            userChange.changePhoneNo("696969");
-//            user = new User(login);
-//            user.printDetails();
+            userChange.changeName("Anushthan");
+            userChange.changePassword("Saxena");
+            userChange.changePhoneNo("7984561230");
         } else System.out.println("No such user");
     }
 }

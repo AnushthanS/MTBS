@@ -46,22 +46,6 @@ public class User {
     private void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
-
-
-//    public void changeName(){
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Enter new name: ");
-//        String newName = sc.next();
-//        this.setName(newName);
-//    }
-//
-//    public void changePassword(){
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Enter new name: ");
-//        String newPassword = sc.next();
-//        this.setPassword(newPassword);
-//    }
-
     public Connection getConnection() throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
         return con;
@@ -69,16 +53,9 @@ public class User {
     public void fillDetails(){
         try{
             Connection con = getConnection();
-            String query = "select * from User where username = ?;";
+            String query = "select ? from User where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
 
-            pst.setString(1, getUsername());
-            ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                setUsername(rs.getString(1));
-                setName(rs.getString(2));
-                setPhoneNo(rs.getString(3));
-            }
         } catch (Exception e){
             e.printStackTrace();
         }
