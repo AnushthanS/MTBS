@@ -1,65 +1,63 @@
+
 package TicketBooking;
 
-import javax.sound.midi.Soundbank;
+
 import java.sql.*;
-//import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
-import java.sql.CallableStatement;
+import java.util.*;
 
-public class TicketBooking implements  TicketBookingInterface{
+public class TicketBooking implements  TicketBookingInterface {
 
 
-    private String location;
-    private String movie;
-  //  private int date;
-    private String theatre;
-//    private String dimensional;
-    private String Time_Slot;
+    private int location;
+    private int movie;
+    //  private int date;
+    private int theatre;
+    //    private String dimensional;
+    private int Time_Slot;
 
     private int Number_of_Tickets;
 
 
-    public TicketBooking(){
+    public TicketBooking() {
     }
 
-    public TicketBooking(String location, String movie, String theatre , String TimeSlot) {
+    public TicketBooking(int location, int movie, int theatre, int TimeSlot) {
         this.location = location;
         this.movie = movie;
-     this.theatre = theatre;
-     this.Time_Slot = TimeSlot;
+        this.theatre = theatre;
+        this.Time_Slot = TimeSlot;
     }
 
-    public String getLocation() {
+    public int getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(int location) {
         this.location = location;
     }
 
-    public String getMovie() {
+    public int getMovie() {
         return movie;
     }
 
-    public void setMovie(String movie) {
+    public void setMovie(int movie) {
         this.movie = movie;
     }
 
 
-    public String getTheatre() {
+    public int getTheatre() {
         return theatre;
     }
 
-    public void setTheatre(String theatre) {
+    public void setTheatre(int theatre) {
         this.theatre = theatre;
     }
 
-    public String getTime_Slot() {
+    public int getTime_Slot() {
         return Time_Slot;
     }
 
-    public void setTime_Slot(String time_Slot) {
+    public void setTime_Slot(int time_Slot) {
         Time_Slot = time_Slot;
     }
 
@@ -71,242 +69,249 @@ public class TicketBooking implements  TicketBookingInterface{
         Number_of_Tickets = number_of_Tickets;
     }
 
-    Scanner input = new Scanner(System.in);
-    public void details()
-   {
-        Location();
+    HashMap<Integer, String> loc = new HashMap<Integer, String>();
 
-   }
-   public  void Location()
-   {
-       try{
-           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-           String query = "select Distinct Location from TheatreInfo;";
-
-           Statement st = con.createStatement();
-           ResultSet rs = st.executeQuery(query);
-
-           String print_location = "";
-           System.out.println("Enter Location");
-           while (rs.next()) {
-                print_location = rs.getString("Location");
-               System.out.println(print_location);
-           }
-
-           setLocation(input.nextLine());
-           CheckLocation();
-
-
-       } catch (Exception e){
-           e.printStackTrace();
-       }
-   }
-
-   public void CheckLocation()
-   {
-       try
-       {
-           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-
-           String query1 = "select Distinct Location from TheatreInfo where Location like'"+getLocation()+"'";
-           Statement st1 = con.createStatement();
-           ResultSet  rs1 = st1.executeQuery(query1);
-
-           String CheckLocation = "";
-           while (rs1.next())
-           {
-               CheckLocation = rs1.getString(1);
-           }
-
-            Scanner wer = new Scanner(System.in);
-           if (Objects.equals(CheckLocation.compareToIgnoreCase(getLocation()), getLocation().compareToIgnoreCase(CheckLocation)))
-           {
-               Movie();
-           }
-           else {
-               System.out.println("Location is Not Found, PLease Enter the Given Location");
-           }
-       } catch (Exception  e){
-           e.printStackTrace();
-       }
-   }
-
-    public  void Movie()
-    {
-        try{
+    public void Location() {
+        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "select title from Movie;";
+            String query = "select Distinct location from TheatreInfo;";
 
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-            System.out.println("Enter Movie Name");
-            while (rs.next())
-            {
-                String Title = rs.getString("title").replace("_", " ");
-                System.out.println(Title);
+            System.out.println("Enter Location Number");
+            int i = 1;
+            while (rs.next()) {
+
+                String print_location = rs.getString("location");
+                loc.put(i, print_location);
+                i++;
+                System.out.println(i - 1+"." + " " + print_location);
+
+            }
+
+            Scanner sc = new Scanner(System.in);
+
+            setLocation(sc.nextInt());
+            CheckLocation();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void CheckLocation() {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+
+            String query1 = "select Distinct location from TheatreInfo where location like'" + loc.get(getLocation()) + "'";
+            Statement st1 = con.createStatement();
+            ResultSet rs1 = st1.executeQuery(query1);
+
+            String CheckLocation = "";
+            while (rs1.next()) {
+                CheckLocation = rs1.getString(1);
+            }
+
+            if (CheckLocation.equalsIgnoreCase(loc.get(getLocation()))) {
+
+                Movie();
+            } else {
+                System.out.println("Location is Not Found, PLease Enter the Given Location");
             }
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            setMovie(input.nextLine().replace(" ", "_"));
-            System.out.println(getMovie());
+    public void Movie() {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "select movie_id , movie_name from MovieInfo;";
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            System.out.println("Enter Movie_ID");
+            System.out.println("Movie_ID   Movie_Name");
+
+            while (rs.next()) {
+
+                String Title = rs.getString(2).replace("_", " ");
+                int MovieID = rs.getInt(1);
+                System.out.println(MovieID + "." + "  \t\t" + Title);
+            }
+
+            Scanner sc = new Scanner(System.in);
+            setMovie(sc.nextInt());
             CheckMovie();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void CheckMovie()
-    {
-        try{
+    public void CheckMovie() {
+        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
 
 
-            String query1 = "select title from Movie where title like'"+getMovie()+"';";
+            String query1 = "select movie_id from movieInfo where movie_id like'" + getMovie() + "';";
             Statement st1 = con.createStatement();
-            ResultSet  rs1 = st1.executeQuery(query1);
+            ResultSet rs1 = st1.executeQuery(query1);
 
 
-            String CheckMovie = "";
-            while (rs1.next())
-            {
-                CheckMovie = rs1.getString("title");
-               //System.out.println(CheckMovie);
+            int CheckMovie = 0;
+            while (rs1.next()) {
+                CheckMovie = rs1.getInt("movie_id");
+
             }
 
-         if (Objects.equals(CheckMovie.compareToIgnoreCase(getMovie()), getMovie().compareToIgnoreCase(CheckMovie)))
-            {
-               Theatre();
-            }
-            else {
+            if (getMovie() == CheckMovie) {
+                Theatre();
+            } else {
                 System.out.println("Movie is Not Found, PLease Enter the Given Movie");
             }
-        } catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-
-    public  void Theatre()
-    {
-        try{
+    public void Theatre() {
+        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "select Distinct Theatre from TheatreInfo where Location like '"+getLocation()+"'";
+            String query = "select Distinct theatre_id  , theatre from TheatreInfo where location like '" + loc.get(getLocation()) + "'";
+
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-            System.out.println("Enter Theatre Name");
-            while (rs.next())
-            {
-                String lc = rs.getString(1);
-                System.out.println(lc);
+            System.out.println("Enter Theatre ID");
+            System.out.println("Theatre_ID     Theatre");
+            while (rs.next()) {
+                int theatre_id = rs.getInt(1);
+                String theatre = rs.getString("theatre").replace("_", " ");
+
+
+                System.out.println(theatre_id + "." + "\t   " + theatre);
             }
 
-
-            setTheatre(input.nextLine().replace(" ","_"));
+            Scanner sc = new Scanner(System.in);
+            setTheatre(sc.nextInt());
             CheckTheatre();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void CheckTheatre()
-    {
-        try{
+    public void CheckTheatre() {
+        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
 
-            String query1 = "select distinct Theatre from TheatreInfo where Theatre like '"+getTheatre()+"' ";
+            String query1 = "select distinct theatre_id from TheatreInfo where theatre_id like '" + getTheatre() + "' ";
             Statement st1 = con.createStatement();
-            ResultSet  rs1 = st1.executeQuery(query1);
+            ResultSet rs1 = st1.executeQuery(query1);
 
-            String CheckTheatre = "";
-            while (rs1.next())
-            {
-                CheckTheatre = rs1.getString(1).replace(" ","_");
-
-            }
-
-
-            if (Objects.equals(CheckTheatre.compareToIgnoreCase(getTheatre()) ,getTheatre().compareToIgnoreCase(CheckTheatre)))
-            {
-                return;
-              //  TimeSlot();
+            int CheckTheatre = 0;
+            while (rs1.next()) {
+                CheckTheatre = rs1.getInt("theatre_id");
 
             }
-            else {
+
+            if (CheckTheatre == getTheatre()) {
+                TimeSlot();
+            } else {
                 System.out.println("Theatre is Not Found, PLease Enter the Given Theatre");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public  void TimeSlot()
-    {
-        try{
+    HashMap<Integer, String> Time = new HashMap<Integer, String>();
+
+    public void TimeSlot() {
+        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "select TimeSlot from Movie;";
+            String query = "select time_Slot from bookinginfo;";
 
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-            while (rs.next())
-            {
-                String TimeSlot = rs.getString("TimeSlot");
-                System.out.println(TimeSlot);
+            int i = 1;
+            System.out.println("Enter Time Slot Number");
+
+            while (rs.next()) {
+                String TimeSlot = rs.getString("time_slot");
+                Time.put(i, TimeSlot);
+                i++;
+                System.out.println(i - 1 +"."+ " " + TimeSlot);
             }
-        } catch (Exception e){
+            Scanner sc = new Scanner(System.in);
+            setTime_Slot(sc.nextInt());
+            CheckTimeSlot();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public  void NumberOfTickets()
-    {
-        try{
+    public void CheckTimeSlot() {
+        try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "Update TheatreInfo set Number_of_Tickets = Number_of_Tickets - ? where Theatre = ? && ;";
+            String query = "Select time_Slot from BookingInfo where time_Slot like '" + Time.get(getTime_Slot()) + "';";
+
+
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            String TimeSlot = "";
+            while (rs.next()) {
+                TimeSlot = rs.getString("time_slot");
+            }
+
+            if (TimeSlot.equalsIgnoreCase(Time.get(getTime_Slot()))) {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Enter the Number of Tickets");
+                setNumber_of_Tickets(sc.nextInt());
+                NumberOfTickets();
+            }
+            else {
+                System.out.println("Please choose the given time slot");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void NumberOfTickets() {
+
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "Update TheatreInfo set No_of_Tickets = No_of_Tickets - ? where theatre_id like ? && screen like ? ;";
 
             PreparedStatement pst = con.prepareStatement(query);
+            pst.setInt(1, getNumber_of_Tickets());
+            pst.setInt(2, getTheatre());
+            pst.setInt(3, getMovie());
+            pst.executeUpdate();
 
-            pst.setInt(1 , getNumber_of_Tickets());
-            pst.setString(2, getTheatre());
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            rs.next();
-
-//            while (rs.next())
-//            {
-//                int Number_of_Tickets = rs.getInt("Number_of_Tickets");
-//                System.out.println(Number_of_Tickets);
-//            }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void AddDetails() {
-
-        details();
-
-
-
-
-//        System.out.println("Enter Time Slot");
-//        TimeSlot();
-//        setTime_Slot(sc.next());
-        
-//        System.out.println("Enter the Number of Tickets");
-//        setNumber_of_Tickets(sc.nextInt());
-
-
+        Location();
     }
+}
 
-
-    }
