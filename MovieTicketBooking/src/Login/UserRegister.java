@@ -72,9 +72,6 @@ public class UserRegister implements RegisterInterface{
             if(pst.executeUpdate() > 0){
                 System.out.println("New User Added");
             }
-//            ResultSet rs = pst.executeQuery();
-//            rs.next();
-           // setAccess(rs.getString(1).equals("1"));
         }catch (SQLIntegrityConstraintViolationException e){
             System.out.println("Username already registered");
         }

@@ -1,31 +1,27 @@
 
 package TicketBooking;
 
-
 import java.sql.*;
 import java.util.*;
 
-public class TicketBooking implements  TicketBookingInterface {
+public class TicketBooking{
 
-
+    private HashMap<Integer, String> loc = new HashMap<>();
     private int location;
     private int movie;
-    //  private int date;
     private int theatre;
-    //    private String dimensional;
-    private int Time_Slot;
-
-    private int Number_of_Tickets;
+    private int timeSlot;
+    private int numberOfTickets;
 
 
     public TicketBooking() {
     }
 
-    public TicketBooking(int location, int movie, int theatre, int TimeSlot) {
+    public TicketBooking(int location, int movie, int theatre, int timeSlot) {
         this.location = location;
         this.movie = movie;
         this.theatre = theatre;
-        this.Time_Slot = TimeSlot;
+        this.timeSlot = timeSlot;
     }
 
     public int getLocation() {
@@ -53,25 +49,24 @@ public class TicketBooking implements  TicketBookingInterface {
         this.theatre = theatre;
     }
 
-    public int getTime_Slot() {
-        return Time_Slot;
+    public int getTimeSlot() {
+        return timeSlot;
     }
 
-    public void setTime_Slot(int time_Slot) {
-        Time_Slot = time_Slot;
+    public void setTimeSlot(int timeSlot) {
+        this.timeSlot = timeSlot;
     }
 
-    public int getNumber_of_Tickets() {
-        return Number_of_Tickets;
+    public int getNumberOfTickets() {
+        return numberOfTickets;
     }
 
-    public void setNumber_of_Tickets(int number_of_Tickets) {
-        Number_of_Tickets = number_of_Tickets;
+    public void setNumberOfTickets(int numberOfTickets) {
+        this.numberOfTickets = numberOfTickets;
     }
 
-    HashMap<Integer, String> loc = new HashMap<Integer, String>();
 
-    public void Location() {
+    public void getAllLocations() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
             String query = "select Distinct location from TheatreInfo;";
@@ -93,7 +88,7 @@ public class TicketBooking implements  TicketBookingInterface {
             Scanner sc = new Scanner(System.in);
 
             setLocation(sc.nextInt());
-            CheckLocation();
+            checkLocation();
 
 
         } catch (Exception e) {
@@ -102,7 +97,7 @@ public class TicketBooking implements  TicketBookingInterface {
 
     }
 
-    public void CheckLocation() {
+    public void checkLocation() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
 
@@ -117,7 +112,7 @@ public class TicketBooking implements  TicketBookingInterface {
 
             if (CheckLocation.equalsIgnoreCase(loc.get(getLocation()))) {
 
-                Movie();
+                getAllMovies();
             } else {
                 System.out.println("Location is Not Found, PLease Enter the Given Location");
             }
@@ -128,7 +123,7 @@ public class TicketBooking implements  TicketBookingInterface {
         }
     }
 
-    public void Movie() {
+    public void getAllMovies() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
             String query = "select movie_id , movie_name from MovieInfo;";
@@ -148,14 +143,14 @@ public class TicketBooking implements  TicketBookingInterface {
 
             Scanner sc = new Scanner(System.in);
             setMovie(sc.nextInt());
-            CheckMovie();
+            checkMovie();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void CheckMovie() {
+    public void checkMovie() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
 
@@ -172,7 +167,7 @@ public class TicketBooking implements  TicketBookingInterface {
             }
 
             if (getMovie() == CheckMovie) {
-                Theatre();
+                getAllTheatre();
             } else {
                 System.out.println("Movie is Not Found, PLease Enter the Given Movie");
             }
@@ -183,7 +178,7 @@ public class TicketBooking implements  TicketBookingInterface {
     }
 
 
-    public void Theatre() {
+    public void getAllTheatre() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
             String query = "select Distinct theatre_id  , theatre from TheatreInfo where location like '" + loc.get(getLocation()) + "'";
@@ -203,14 +198,14 @@ public class TicketBooking implements  TicketBookingInterface {
 
             Scanner sc = new Scanner(System.in);
             setTheatre(sc.nextInt());
-            CheckTheatre();
+            checkTheatre();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void CheckTheatre() {
+    public void checkTheatre() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
 
@@ -225,7 +220,7 @@ public class TicketBooking implements  TicketBookingInterface {
             }
 
             if (CheckTheatre == getTheatre()) {
-                TimeSlot();
+                getAllTimeSlots();
             } else {
                 System.out.println("Theatre is Not Found, PLease Enter the Given Theatre");
             }
@@ -235,9 +230,9 @@ public class TicketBooking implements  TicketBookingInterface {
         }
     }
 
-    HashMap<Integer, String> Time = new HashMap<Integer, String>();
+    HashMap<Integer, String> Time = new HashMap<>();
 
-    public void TimeSlot() {
+    public void getAllTimeSlots() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
             String query = "select time_Slot from bookinginfo;";
@@ -255,32 +250,32 @@ public class TicketBooking implements  TicketBookingInterface {
                 System.out.println(i - 1 +"."+ " " + TimeSlot);
             }
             Scanner sc = new Scanner(System.in);
-            setTime_Slot(sc.nextInt());
-            CheckTimeSlot();
+            setTimeSlot(sc.nextInt());
+            checkTimeSlot();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void CheckTimeSlot() {
+    public void checkTimeSlot() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "Select time_Slot from BookingInfo where time_Slot like '" + Time.get(getTime_Slot()) + "';";
+            String query = "Select time_Slot from BookingInfo where time_Slot like '" + Time.get(getTimeSlot()) + "';";
 
 
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-            String TimeSlot = "";
+            String timeSlot = "";
             while (rs.next()) {
-                TimeSlot = rs.getString("time_slot");
+                timeSlot = rs.getString("time_slot");
             }
 
-            if (TimeSlot.equalsIgnoreCase(Time.get(getTime_Slot()))) {
+            if (timeSlot.equalsIgnoreCase(Time.get(getTimeSlot()))) {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Enter the Number of Tickets");
-                setNumber_of_Tickets(sc.nextInt());
+                setNumberOfTickets(sc.nextInt());
                 NumberOfTickets();
             }
             else {
@@ -298,7 +293,7 @@ public class TicketBooking implements  TicketBookingInterface {
             String query = "Update TheatreInfo set No_of_Tickets = No_of_Tickets - ? where theatre_id like ? && screen like ? ;";
 
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, getNumber_of_Tickets());
+            pst.setInt(1, getNumberOfTickets());
             pst.setInt(2, getTheatre());
             pst.setInt(3, getMovie());
             pst.executeUpdate();
@@ -309,9 +304,8 @@ public class TicketBooking implements  TicketBookingInterface {
         }
     }
 
-    @Override
-    public void AddDetails() {
-        Location();
+    public void startBooking() {
+        getAllLocations();
     }
 }
 
