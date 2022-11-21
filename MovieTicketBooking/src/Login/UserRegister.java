@@ -1,9 +1,7 @@
 package Login;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.Scanner;
-
 public class UserRegister implements RegisterInterface{
 
     private String username;

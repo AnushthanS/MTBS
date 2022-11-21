@@ -1,4 +1,3 @@
-
 package TicketBooking;
 
 import java.sql.*;
@@ -6,7 +5,8 @@ import java.util.*;
 
 public class TicketBooking{
 
-    private HashMap<Integer, String> loc = new HashMap<>();
+    private final HashMap<Integer, String> loc;
+    private final HashMap<Integer, String> timings;
     private int location;
     private int movie;
     private int theatre;
@@ -15,13 +15,9 @@ public class TicketBooking{
 
 
     public TicketBooking() {
-    }
-
-    public TicketBooking(int location, int movie, int theatre, int timeSlot) {
-        this.location = location;
-        this.movie = movie;
-        this.theatre = theatre;
-        this.timeSlot = timeSlot;
+        loc = new HashMap<>();
+        this.location = -1;
+        timings = new HashMap<>();
     }
 
     public int getLocation() {
@@ -230,7 +226,7 @@ public class TicketBooking{
         }
     }
 
-    HashMap<Integer, String> Time = new HashMap<>();
+
 
     public void getAllTimeSlots() {
         try {
@@ -245,7 +241,7 @@ public class TicketBooking{
 
             while (rs.next()) {
                 String TimeSlot = rs.getString("time_slot");
-                Time.put(i, TimeSlot);
+                timings.put(i, TimeSlot);
                 i++;
                 System.out.println(i - 1 +"."+ " " + TimeSlot);
             }
@@ -261,7 +257,7 @@ public class TicketBooking{
     public void checkTimeSlot() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "Select time_Slot from BookingInfo where time_Slot like '" + Time.get(getTimeSlot()) + "';";
+            String query = "Select time_Slot from BookingInfo where time_Slot like '" + timings.get(getTimeSlot()) + "';";
 
 
             Statement st = con.createStatement();
@@ -272,7 +268,7 @@ public class TicketBooking{
                 timeSlot = rs.getString("time_slot");
             }
 
-            if (timeSlot.equalsIgnoreCase(Time.get(getTimeSlot()))) {
+            if (timeSlot.equalsIgnoreCase(timings.get(getTimeSlot()))) {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Enter the Number of Tickets");
                 setNumberOfTickets(sc.nextInt());
