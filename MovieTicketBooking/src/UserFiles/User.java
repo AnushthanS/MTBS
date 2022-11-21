@@ -47,15 +47,20 @@ public class User {
         this.phoneNo = phoneNo;
     }
     public Connection getConnection() throws SQLException {
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-        return con;
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
     }
     public void fillDetails(){
         try{
             Connection con = getConnection();
-            String query = "select ? from User where username = ?;";
+            String query = "select * from User where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
-
+            pst.setString(1, getUsername());
+            ResultSet resultSet = pst.executeQuery();
+            while (resultSet.next()){
+                setName(resultSet.getString("Name"));
+                setPhoneNo(resultSet.getString("phone_number"));
+                setPassword(resultSet.getString("password"));
+            }
         } catch (Exception e){
             e.printStackTrace();
         }

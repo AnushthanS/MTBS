@@ -20,7 +20,7 @@ public class AdminLogin implements LoginInterface{
         setPassword("");
         access = false;
     }
-    private String getAdminName() {
+    public String getAdminName() {
         return adminName;
     }
 
@@ -35,7 +35,7 @@ public class AdminLogin implements LoginInterface{
     }
     @Override
     public void inputPrompt(){
-        System.out.print("Enter Admin.Admin name: ");
+        System.out.print("Enter Admin name: ");
         Scanner scanner = new Scanner(System.in);
         setAdminName(scanner.next());
 
@@ -49,7 +49,7 @@ public class AdminLogin implements LoginInterface{
     public void authentication() {
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "select count(*) from Admin.Admin where admin_name = ? and password = ?;";
+            String query = "select count(*) from Admin where admin_name = ? and password = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, getAdminName());
             pst.setString(2, getPassword());
