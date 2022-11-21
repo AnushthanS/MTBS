@@ -10,10 +10,11 @@ public class TestUser {
         if(login.getAccess()) {
             User user = new User(login);
             user.printDetails();
-            UserChange userChange = new UserChange(user);
-            userChange.changeName("Rishabh");
-            userChange.changePassword("Jha");
-            userChange.changePhoneNo("1122334455");
+//            UserChange userChange = new UserChange(user);
+//            userChange.changeName("Rishabh");
+//            userChange.changePassword("Jha");
+//            userChange.changePhoneNo("1122334455");
+            user.checkBookings();
         } else System.out.println("No such user");
     }
 }

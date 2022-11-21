@@ -65,6 +65,41 @@ public class User {
             e.printStackTrace();
         }
     }
+    public void checkBookings(){
+        try{
+            Connection con = getConnection();
+            String query = "select * from bookingInfo where username = ?;";
+            String sub1 = "select movie_name from movieInfo where movie_id = ?;";
+            String sub2 = "select theatre, screen from theatreInfo where theatre_id = ?;";
+
+            PreparedStatement pst = con.prepareStatement(query);
+            PreparedStatement subPst1 = con.prepareStatement(sub1);
+            PreparedStatement subPst2 = con.prepareStatement(sub2);
+
+            pst.setString(1, getUsername());
+
+            ResultSet resultSet = pst.executeQuery();
+
+            System.out.println("Bookings for "+getName()+": ");
+            while(resultSet.next()){
+                subPst1.setString(1, resultSet.getString("movie_id"));
+                subPst2.setString(1, resultSet.getString("theatre_id"));
+
+                ResultSet subset1 = subPst1.executeQuery();
+                subset1.next();
+                ResultSet subset2 = subPst2.executeQuery();
+                subset2.next();
+
+                System.out.println("Movie   : "+subset1.getString("movie_name"));
+                System.out.println("Theatre : "+subset2.getString("theatre"));
+                System.out.println("Screen  : "+subset2.getString("screen"));
+                System.out.println("Time    : "+resultSet.getString("time_slot"));
+                System.out.println();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void printDetails(){
         System.out.println("Name     : "+getName());
         System.out.println("Username : "+getUsername());
