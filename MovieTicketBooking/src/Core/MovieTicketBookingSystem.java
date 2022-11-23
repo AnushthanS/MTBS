@@ -62,7 +62,7 @@ public class MovieTicketBookingSystem {
                             break menu;
                         }
                         case 3->{
-                            
+
                         }
                         case 4->{
                             user.checkBookings();
