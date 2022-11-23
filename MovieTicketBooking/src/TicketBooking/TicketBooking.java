@@ -183,7 +183,7 @@ public class TicketBooking {
     public void selectNoOfTickets(){
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "Update TheatreInfo set No_of_Tickets = No_of_Tickets - ? where theatre_id like ? && screen like ? ;";
+            String query = "Update theatreInfo set No_of_Tickets = No_of_Tickets - ? where theatre_id like ? && screen like ? ;";
 
             System.out.println("Enter the number of tickets to book:");
             int choice = scanner.nextInt();

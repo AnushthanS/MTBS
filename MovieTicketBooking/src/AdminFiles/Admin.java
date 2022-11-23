@@ -11,7 +11,7 @@ public class Admin {
     public void showUsers(){
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "select * from User;";
+            String query = "select * from userInfo;";
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){

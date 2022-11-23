@@ -59,7 +59,7 @@ public class UserRegister implements RegisterInterface{
     public void dataEntry(){
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "insert into User values(?,?,?,?)";
+            String query = "insert into userInfo values(?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(query);
 
             pst.setString(1, getName());

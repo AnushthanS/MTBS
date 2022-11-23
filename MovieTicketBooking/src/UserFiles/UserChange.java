@@ -18,7 +18,7 @@ public class UserChange {
     public void changeName(String newName) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "update User set name = ? where username = ?;";
+            String query = "update userInfo set name = ? where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, newName);
             pst.setString(2, getUser().getUsername());
@@ -32,7 +32,7 @@ public class UserChange {
     public void changePassword(String newPassword) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "update User set password = ? where username = ?;";
+            String query = "update userInfo set password = ? where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, newPassword);
             pst.setString(2, getUser().getUsername());
@@ -46,7 +46,7 @@ public class UserChange {
     public void changePhoneNo(String newPhoneNo) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "update User set phone_number = ? where username = ?;";
+            String query = "update userInfo set phone_number = ? where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, newPhoneNo);
             pst.setString(2, getUser().getUsername());
