@@ -1,10 +1,10 @@
 package Test;
 
-import TicketBooking.TicketBooking;
+import TicketBooking.*;
 
 public class TestTicketBooking {
     public static void main(String[] args) {
-        TicketBooking booking = new TicketBooking();
-        booking.startBooking();
+        TicketBooking ticketBooking = new TicketBooking();
+        ticketBooking.startBooking();
     }
 }
