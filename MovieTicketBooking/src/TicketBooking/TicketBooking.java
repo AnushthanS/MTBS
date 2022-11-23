@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 public class TicketBooking {
-    private Scanner scanner;
+    private final Scanner scanner;
     private boolean bStatus;
     private ArrayList<String> location, timings;
     private String locationChoice, timingChoice;
@@ -192,7 +192,8 @@ public class TicketBooking {
             pst.setInt(1, choice);
             pst.setInt(2, getTheatreId());
             pst.setInt(3, bookingDetails.getScreen());
-            bookingDetails.setNoOfTickets(choice);
+            setNoOfTickets(choice);
+            bookingDetails.setNoOfTickets(getNoOfTickets());
             this.bStatus = true;
         } catch (Exception e){
             e.printStackTrace();

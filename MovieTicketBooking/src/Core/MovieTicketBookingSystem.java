@@ -62,8 +62,7 @@ public class MovieTicketBookingSystem {
                             break menu;
                         }
                         case 3->{
-                            TicketBooking newBooking = new TicketBooking();
-                            newBooking.startBooking();
+                            
                         }
                         case 4->{
                             user.checkBookings();
