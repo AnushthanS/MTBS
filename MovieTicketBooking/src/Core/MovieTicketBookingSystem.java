@@ -1,6 +1,7 @@
 package Core;
 
 import Login.UserLogin;
+import TicketBooking.TicketBooking;
 import UserFiles.User;
 import UserFiles.UserChange;
 
@@ -16,7 +17,7 @@ public class MovieTicketBookingSystem {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        if(args.length >= 1){
+        if(args.length >= 1 && !args[0].equalsIgnoreCase("-a")){
             if(args[0].equalsIgnoreCase("-h") || args[0].equalsIgnoreCase("--help")){
                 printHelpDesk();
             } else if(args[0].equalsIgnoreCase("-l") || args[0].equalsIgnoreCase("--list")){
@@ -62,7 +63,8 @@ public class MovieTicketBookingSystem {
                             break menu;
                         }
                         case 3->{
-
+                            TicketBooking booking = new TicketBooking(user.getUsername());
+                            booking.startBooking();
                         }
                         case 4->{
                             user.checkBookings();

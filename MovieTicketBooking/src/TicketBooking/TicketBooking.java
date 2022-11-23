@@ -21,6 +21,7 @@ public class TicketBooking {
     private int theatreId;
     private int noOfTickets;
     private TicketBookingDetails bookingDetails;
+    private String userName;
 
     public String getLocationChoice() {
         return locationChoice;
@@ -54,12 +55,13 @@ public class TicketBooking {
         this.noOfTickets = noOfTickets;
     }
 
-    public TicketBooking(){
+    public TicketBooking(String userName){
         location = new ArrayList<>();
         timings = new ArrayList<>();
         bookingDetails = new TicketBookingDetails();
         scanner = new Scanner(System.in);
         bStatus = false;
+        this.userName = userName;
     }
 
     public void checkLocation(){
@@ -201,6 +203,27 @@ public class TicketBooking {
     }
     public void startBooking(){
         checkLocation();
-        if(bStatus) bookingDetails.printBookingDetails();
+        if(bStatus) {
+            bookingDetails.printBookingDetails();
+            addBooking();
+        }
+    }
+
+    public void addBooking(){
+        try{
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "insert into BookingInfo value(? , ? , ? , ?)";
+
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1 , userName);
+            pst.setString(2, getTimingChoice());
+            pst.setInt(3 , getMovieId());
+            pst.setInt(4 , getTheatreId());
+
+            pst.executeUpdate();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
