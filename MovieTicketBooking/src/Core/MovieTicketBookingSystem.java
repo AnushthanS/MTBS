@@ -15,13 +15,16 @@ public class MovieTicketBookingSystem {
         System.out.println("-l -t will list the location and theatre information");
         System.out.println("-l -b -u [username] will give the booking details for the user");
     }
+    private static void printAdminFunctions(){
+        System.out.println("-a [table_name] will print the database required");
+        System.out.println("-a -p to enter a menu style database printing function");
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        if(args.length >= 1 && !args[0].equalsIgnoreCase("-a")){
+        if(args.length >= 1){
             if(args[0].equalsIgnoreCase("-h") || args[0].equalsIgnoreCase("--help")){
                 printHelpDesk();
             } else if(args[0].equalsIgnoreCase("-l") || args[0].equalsIgnoreCase("--list")){
-                System.out.println("working");
                 switch (args.length){
                     case 1->{
                         System.out.println("Invalid use of the argument!");
@@ -35,6 +38,12 @@ public class MovieTicketBookingSystem {
                     }
                     case 4->{}
                     default -> {}
+                }
+            } else if(args[0].equalsIgnoreCase("-a")){
+                switch (args.length){
+                    case 1->{
+                        printAdminFunctions();
+                    }
                 }
             }
         } else {
@@ -59,8 +68,30 @@ public class MovieTicketBookingSystem {
                         }
                         case 2->{
                             UserChange userChange = new UserChange(user);
-                            System.out.println("Have to fill this later");
-                            break menu;
+                            System.out.println("Enter 1 to change name");
+                            System.out.println("Enter 2 to change password");
+                            System.out.println("Enter 3 to change phone number");
+                            System.out.println("Enter anything else to exit\n");
+
+                            int change = scanner.nextInt();
+                            switch (change){
+                                case 1->{
+                                    System.out.println("Enter the new name");
+                                    String newName = scanner.next();
+                                    userChange.changeName(newName);
+                                }
+                                case 2->{
+                                    System.out.println("Enter the new password");
+                                    String newPass = scanner.next();
+                                    userChange.changePassword(newPass);
+                                }
+                                case 3->{
+                                    System.out.println("Enter the new phone number");
+                                    String newPhoneNo = scanner.next();
+                                    userChange.changePhoneNo(newPhoneNo);
+                                }
+                                default -> {}
+                            }
                         }
                         case 3->{
                             TicketBooking booking = new TicketBooking(user.getUsername());

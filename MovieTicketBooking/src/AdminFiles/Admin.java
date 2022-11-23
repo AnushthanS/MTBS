@@ -101,6 +101,101 @@ public class Admin {
             e.printStackTrace();
         }
     }
-    public void modifyUser(){
+    public void changeName(String Username, String newName) {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "update User set Name = ? where Username = ?;";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, newName);
+            pst.setString(2, Username);
+            pst.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changePassword(String Username, String newPassword) {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "update User set Password = ? where Username = ?;";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, newPassword);
+            pst.setString(2, Username);
+            pst.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changePhoneNo(String Username, String newPhoneNo) {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "update User set phone_number = ? where Username = ?;";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, newPhoneNo);
+            pst.setString(2, Username);
+            pst.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteUser(String Username){
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "delete from User where Username = ?;";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, Username);
+            pst.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void addMovie(String movieID, String movieName, String rating, String genre, String language, String theatreID){
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "insert into values movieInfo(?,?,?,?,?,?);";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, movieID);
+            pst.setString(2, movieName);
+            pst.setString(3, rating);
+            pst.setString(4, genre);
+            pst.setString(5, language);
+            pst.setString(6, theatreID);
+            pst.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteMovie(String movieID){
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "delete from movieInfo where movie_id = ?;";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, movieID);
+            pst.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteBooking(String Username, String movieID){
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "delete from bookingInfo where username = ? and movie_id = ?;";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, Username);
+            pst.setString(2, movieID);
+            pst.execute();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
