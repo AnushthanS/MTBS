@@ -14,6 +14,9 @@ public class User {
         this.username = obj.getUsername();
         fillDetails();
     }
+    public User(String username){
+        this.username = username;
+    }
 
     public String getUsername() {
         return username;

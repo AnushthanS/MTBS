@@ -1,6 +1,5 @@
 package AdminFiles;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +7,20 @@ import java.sql.ResultSet;
 
 public class Admin {
 
+    public void showAdmins(){
+        try{
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
+            String query = "select username from adminInfo;";
+            PreparedStatement pst = con.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                System.out.println("Name: "+rs.getString("username"));
+                System.out.println();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void showUsers(){
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
@@ -15,9 +28,9 @@ public class Admin {
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                System.out.println("Name         : "+rs.getString("Name"));
-                System.out.println("Username     : "+rs.getString("Username"));
-                System.out.println("Password     : "+rs.getString("Password"));
+                System.out.println("Name         : "+rs.getString("name"));
+                System.out.println("Username     : "+rs.getString("username"));
+                System.out.println("Password     : "+rs.getString("password"));
                 System.out.println("Phone number : "+rs.getString("phone_number"));
                 System.out.println();
             }
@@ -74,7 +87,6 @@ public class Admin {
             while(rs.next()){
                 System.out.println("Theatre ID : "+rs.getString("theatre_id"));
                 System.out.println("Movie ID   : "+rs.getString("movie_id"));
-                System.out.println("Date       : "+rs.getString("date"));
                 System.out.println("Time       : "+rs.getString("time"));
                 System.out.println();
             }
@@ -91,7 +103,6 @@ public class Admin {
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
                 System.out.println("Username   : "+rs.getString("username"));
-                System.out.println("Date       : "+rs.getString("date"));
                 System.out.println("Time slot  : "+rs.getString("time_slot"));
                 System.out.println("Movie ID   : "+rs.getString("movie_id"));
                 System.out.println("Theatre ID : "+rs.getString("theatre_id"));
@@ -104,7 +115,7 @@ public class Admin {
     public void changeName(String Username, String newName) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "update User set Name = ? where Username = ?;";
+            String query = "update userInfo set name = ? where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, newName);
             pst.setString(2, Username);
@@ -118,7 +129,7 @@ public class Admin {
     public void changePassword(String Username, String newPassword) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "update User set Password = ? where Username = ?;";
+            String query = "update userInfo set password = ? where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, newPassword);
             pst.setString(2, Username);
@@ -132,7 +143,7 @@ public class Admin {
     public void changePhoneNo(String Username, String newPhoneNo) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "update User set phone_number = ? where Username = ?;";
+            String query = "update userInfo set phone_number = ? where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, newPhoneNo);
             pst.setString(2, Username);
@@ -146,7 +157,7 @@ public class Admin {
     public void deleteUser(String Username){
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "delete from User where Username = ?;";
+            String query = "delete from userInfo where username = ?;";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, Username);
             pst.execute();
@@ -198,4 +209,5 @@ public class Admin {
             e.printStackTrace();
         }
     }
+
 }
