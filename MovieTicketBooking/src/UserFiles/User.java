@@ -93,8 +93,8 @@ public class User {
                 ResultSet subset2 = subPst2.executeQuery();
                 subset2.next();
 
-                System.out.println("Movie   : "+subset1.getString("movie_name"));
-                System.out.println("Theatre : "+subset2.getString("theatre"));
+                System.out.println("Movie   : "+subset1.getString("movie_name").replace("_", " "));
+                System.out.println("Theatre : "+subset2.getString("theatre").replace("_", " "));
                 System.out.println("Screen  : "+subset2.getString("screen"));
                 System.out.println("Time    : "+resultSet.getString("time_slot"));
                 System.out.println();

@@ -83,12 +83,12 @@ public class MovieTicketBookingSystem {
                                     pst = con.prepareStatement(query);
                                     rs = pst.executeQuery();
                                     while (rs.next()){
-                                        String subquery = "select distinct location, theatre from theatreInfo where theatreId = "+rs.getInt("theatre_id")+";";
+                                        String subquery = "select distinct location, theatre from theatreInfo where theatre_id = "+rs.getInt("theatre_id")+";";
                                         PreparedStatement subpst = con.prepareStatement(subquery);
                                         ResultSet subrs = subpst.executeQuery();
                                         while(subrs.next()){
                                             System.out.println("Location          : "+subrs.getString("location"));
-                                            System.out.println("Theatre           : "+subrs.getString("theatre"));
+                                            System.out.println("Theatre           : "+subrs.getString("theatre").replace("_", " "));
                                             System.out.println();
                                         }
                                     }
@@ -107,6 +107,7 @@ public class MovieTicketBookingSystem {
                                 ResultSet rs = pst.executeQuery();
                                 if(rs.next()){
                                     User tempUser = new User(rs.getString("username"));
+                                    tempUser.fillDetails();
                                     tempUser.checkBookings();
                                 } else System.out.println("Invalid username");
                             } catch (Exception e){
