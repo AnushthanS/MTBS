@@ -24,6 +24,8 @@ public class MovieTicketBookingSystem {
         System.out.println("-a -m to enter a menu style database modifying function");
     }
     public static void main(String[] args) {
+        DataImport dataImport = new DataImport();
+        dataImport.refresh();
         Scanner scanner = new Scanner(System.in);
         if(args.length >= 1){
             if(args[0].equalsIgnoreCase("-h") || args[0].equalsIgnoreCase("--help")){
