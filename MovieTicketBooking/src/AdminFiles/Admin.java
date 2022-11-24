@@ -1,9 +1,6 @@
 package AdminFiles;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class Admin {
 
@@ -178,6 +175,8 @@ public class Admin {
             pst.setString(5, language);
             pst.setString(6, theatreID);
             pst.execute();
+        }catch (SQLIntegrityConstraintViolationException e){
+            System.out.println("This entry already exists");
         }
         catch(Exception e) {
             e.printStackTrace();
