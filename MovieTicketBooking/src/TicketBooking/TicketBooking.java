@@ -195,6 +195,7 @@ public class TicketBooking {
             pst.setInt(2, getTheatreId());
             pst.setInt(3, bookingDetails.getScreen());
             setNoOfTickets(choice);
+            pst.executeUpdate();
             bookingDetails.setNoOfTickets(getNoOfTickets());
             this.bStatus = true;
         } catch (Exception e){
