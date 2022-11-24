@@ -55,7 +55,7 @@ public class TicketBookingDetails {
 
     public void printBookingDetails(){
         System.out.println("Location          : " + getLocation().toUpperCase());
-        System.out.println("Movie Name        : " + getMovieName().toUpperCase());
+        System.out.println("Movie Name        : " + getMovieName().toUpperCase().replace("_", " "));
         System.out.println("Theatre Name      : " + getTheatre().toUpperCase());
         System.out.println("Screen            : " + getScreen());
         System.out.println("Time Slot         : " + getTime().toUpperCase());

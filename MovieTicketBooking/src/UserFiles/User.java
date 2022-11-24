@@ -107,5 +107,6 @@ public class User {
         System.out.println("Name     : "+getName());
         System.out.println("Username : "+getUsername());
         System.out.println("Phone    : "+getPhoneNo());
+        System.out.println("Password : "+getPassword());
     }
 }
