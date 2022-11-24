@@ -54,7 +54,7 @@ public class DataImport {
             String query = "insert into bookingInfo values(?, ?, ?, ?);";
             PreparedStatement pst = con.prepareStatement(query);
 
-            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/Database/bookingInfo.csv"));
+            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/MovieTicketBooking/src/Database/bookingInfo.csv"));
 
             String fileText;
             int i = 0;
@@ -85,7 +85,7 @@ public class DataImport {
             String query = "insert into userInfo values(?, ?, ?, ?);";
             PreparedStatement pst = con.prepareStatement(query);
 
-            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/Database/userInfo.csv"));
+            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/MovieTicketBooking/src/Database/userInfo.csv"));
 
             String fileText;
             int i = 0;
@@ -118,7 +118,7 @@ public class DataImport {
             String query = "insert into showInfo values(?, ?, ?);";
             PreparedStatement pst = con.prepareStatement(query);
 
-            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/Database/showInfo.csv"));
+            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/MovieTicketBooking/src/Database/showInfo.csv"));
 
             String fileText;
             int i = 0;
@@ -148,7 +148,7 @@ public class DataImport {
             String query = "insert into adminInfo values(?, ?);";
             PreparedStatement pst = con.prepareStatement(query);
 
-            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/Database/adminInfo.csv"));
+            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/MovieTicketBooking/src/Database/adminInfo.csv"));
 
             String fileText;
             int i = 0;
@@ -178,7 +178,7 @@ public class DataImport {
             String query = "insert into theatreInfo values(?, ?, ?, ?, ?);";
             PreparedStatement pst = con.prepareStatement(query);
 
-            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/Database/theatreInfo.csv"));
+            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/MovieTicketBooking/src/Database/theatreInfo.csv"));
 
             String fileText;
             int i = 0;
@@ -211,7 +211,7 @@ public class DataImport {
             String query = "insert into movieInfo values(?, ?, ?, ?, ?, ?);";
             PreparedStatement pst = con.prepareStatement(query);
 
-            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/Database/movieInfo.csv"));
+            BufferedReader lineReader = new BufferedReader(new FileReader("/Users/anushthan/Development/MTBS/MovieTicketBooking/src/Database/movieInfo.csv"));
 
             String fileText;
             int i = 0;

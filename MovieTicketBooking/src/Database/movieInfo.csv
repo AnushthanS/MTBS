@@ -1,0 +1,37 @@
+"movie_id","movie_name","rating","genre","language","theatre_id"
+1,"godfather",8.9,"Crime Fiction","Eng",101
+1,"godfather",8.9,"Crime Fiction","Eng",102
+1,"godfather",8.9,"Crime Fiction","Eng",103
+1,"godfather",8.9,"Crime Fiction","Eng",201
+1,"godfather",8.9,"Crime Fiction","Eng",202
+1,"godfather",8.9,"Crime Fiction","Eng",203
+1,"godfather",8.9,"Crime Fiction","Eng",301
+1,"godfather",8.9,"Crime Fiction","Eng",302
+1,"godfather",8.9,"Crime Fiction","Eng",303
+1,"godfather",8.9,"Crime Fiction","Eng",401
+1,"godfather",8.9,"Crime Fiction","Eng",402
+1,"godfather",8.9,"Crime Fiction","Eng",403
+2,"avengers_end_game",8.5,"Action","Eng/Hin",101
+2,"avengers_end_game",8.5,"Action","Eng/Hin",102
+2,"avengers_end_game",8.5,"Action","Eng/Hin",103
+2,"avengers_end_game",8.5,"Action","Eng/Hin",201
+2,"avengers_end_game",8.5,"Action","Eng/Hin",202
+2,"avengers_end_game",8.5,"Action","Eng/Hin",203
+2,"avengers_end_game",8.5,"Action","Eng/Hin",301
+2,"avengers_end_game",8.5,"Action","Eng/Hin",302
+2,"avengers_end_game",8.5,"Action","Eng/Hin",303
+2,"avengers_end_game",8.5,"Action","Eng/Hin",401
+2,"avengers_end_game",8.5,"Action","Eng/Hin",402
+2,"avengers_end_game",8.5,"Action","Eng/Hin",403
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",101
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",102
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",103
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",201
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",202
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",203
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",301
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",302
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",303
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",401
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",402
+3,"black_panther_wakanda_forever",8.1,"Action","Eng/Hin",403
