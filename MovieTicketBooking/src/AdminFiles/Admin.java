@@ -169,7 +169,7 @@ public class Admin {
     public void addMovie(String movieID, String movieName, String rating, String genre, String language, String theatreID){
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project", "admin", "Project@112");
-            String query = "insert into values movieInfo(?,?,?,?,?,?);";
+            String query = "insert into movieInfo values(?,?,?,?,?,?);";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, movieID);
             pst.setString(2, movieName);

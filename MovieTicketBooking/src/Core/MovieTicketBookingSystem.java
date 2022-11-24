@@ -170,6 +170,7 @@ public class MovieTicketBookingSystem {
                                             System.out.println("Enter the new/modified name of user:");
                                             String newName = scanner.next();
                                             admin.changeName(userName, newName);
+                                            admin.showUsers();
                                         }
                                         case 2 -> {
                                             System.out.println("Enter the username of user:");
@@ -177,6 +178,7 @@ public class MovieTicketBookingSystem {
                                             System.out.println("Enter the new/modified password of user:");
                                             String newPass = scanner.next();
                                             admin.changePassword(userName, newPass);
+                                            admin.showUsers();
                                         }
                                         case 3 -> {
                                             System.out.println("Enter the username of user:");
@@ -184,11 +186,13 @@ public class MovieTicketBookingSystem {
                                             System.out.println("Enter the new/modified phone number of user:");
                                             String newPhoneNo = scanner.next();
                                             admin.changePhoneNo(userName, newPhoneNo);
+                                            admin.showUsers();
                                         }
                                         case 4 -> {
                                             System.out.println("Enter the username of user to be deleted:");
                                             String userName = scanner.next();
                                             admin.deleteUser(userName);
+                                            admin.showUsers();
                                         }
                                         case 5 -> {
                                             System.out.println("Enter the movie ID of the movie to be added:");
@@ -204,17 +208,20 @@ public class MovieTicketBookingSystem {
                                             System.out.println("Enter the theatre ID of the movie to be added:");
                                             String theatreID = scanner.next();
                                             admin.addMovie(movieID, movieName, rating, genre, language, theatreID);
+                                            admin.showMovies();
                                         }
                                         case 6 -> {
                                             System.out.println("Enter the movie ID of movie to be deleted:");
                                             String movieID = scanner.next();
                                             admin.deleteMovie(movieID);
+                                            admin.showMovies();
                                         }
                                         case 7 -> {
                                             System.out.println("Enter the username and movie ID of the booking to be deleted:");
                                             String userName = scanner.next();
                                             String movieID = scanner.next();
                                             admin.deleteBooking(userName, movieID);
+                                            admin.showBookings();
                                         }
                                         case 8 -> {
                                             break menu;
@@ -234,6 +241,7 @@ public class MovieTicketBookingSystem {
             if(flag == 1) checkNew = true;
             if(checkNew){
                 UserRegister userRegister = new UserRegister();
+                userRegister.inputPrompt();
                 userRegister.dataEntry();
             }
             UserLogin userLogin = new UserLogin();
